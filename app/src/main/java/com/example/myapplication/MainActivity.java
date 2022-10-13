@@ -10,9 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.sql.Timestamp;
+
 public class MainActivity extends AppCompatActivity {
     private static final String toLog = "MainActivity";
-    Person person = new Person();
     String firstNameString = null;
     String lastNameString = null;
     String cityString = null;
@@ -48,11 +49,6 @@ public class MainActivity extends AppCompatActivity {
         phoneNumberString = phoneNumber.getText().toString();
 
         Person person1 = new Person(firstNameString, lastNameString, cityString, emailString, phoneNumberString);
-//        person.setCity(cityString);
-//        person.setEmail(emailString);
-//        person.setFirstName(firstNameString);
-//        person.setLastName(lastNameString);
-//        person.setPhoneNumber(phoneNumberString);
         intent.putExtra("person", person1);
         startActivity(intent);
     }
@@ -60,40 +56,45 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(toLog, new java.util.Date() + " onStart");
+        Log.d(toLog, getTimestamp() + " onStart");
 
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d(toLog, new java.util.Date() + " onSaveInstanceState");
+        Log.d(toLog, getTimestamp() + " onSaveInstanceState");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(toLog, new java.util.Date() + " onStop");
+        Log.d(toLog, getTimestamp() + " onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(toLog, new java.util.Date() + " onDestroy");
+        Log.d(toLog, getTimestamp() + " onDestroy");
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(toLog, new java.util.Date() + " onResume");
+        Log.d(toLog, getTimestamp() + " onResume");
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(toLog, new java.util.Date() + " onPause");
+        Log.d(toLog, getTimestamp() + " onPause");
 
+    }
+
+    public String getTimestamp() {
+        Long ts = System.currentTimeMillis()/1000;
+        return ts.toString();
     }
 }
